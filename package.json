@@ -1,9 +1,9 @@
 {
-    "name": "noobjs"
-  , "description": "A demo app in nodejs illustrating use of express, jade and mogoose"
-  , "version": "3.0.0"
-  , "private": false
-  , "author": "Madhusudhan Srinivasa <madhums8@gmail.com> (http://madhums.github.com)"
+    "name": "gitfly"
+  , "description": "A github issue client"
+  , "version": "0.1"
+  , "private": true
+  , "author": "Jeremy Marc <jeremy.marc@me.com> (http://jeremymarc.github.com)"
   , "engines": {
         "node": "0.6.18"
       , "npm": "1.1.9"
@@ -18,9 +18,6 @@
     , "mongoose": "latest"
     , "connect-mongodb": "latest"
     , "passport": "latest"
-    , "passport-local": "latest"
-    , "passport-facebook": "latest"
-    , "passport-twitter": "latest"
     , "passport-github": "latest"
     , "passport-google-oauth": "latest"
     , "underscore": "latest"

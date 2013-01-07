@@ -1,0 +1,46 @@
+<html>
+  <body>
+    <h2></h2>
+    <h3>List of closed ticket for today: </h3>
+
+    <% repositories.forEach(function(repo) { %>
+        <h4>Repository <%= repo.name %></h4>
+        <% for (user_id in repo.user_issues) { %>
+            <% user_issues = repo.user_issues[user_id] %>
+            <% user_issues.forEach(function(issue) { %>
+                <div class="discussion-bubble discussion-reference js-comment-container">
+                    <img class="discussion-bubble-avatar" src="<%= issue.user.avatar_url %>" width="48" height="48">
+                    <div class="discussion-bubble-content bubble">
+                        <div class="discussion-bubble-inner">
+                            <div class="js-comment comment issue-ref-comment">
+                                <div class="comment-header">
+                                    <span class="comment-type-icon mini-icon mini-icon-reference"></span>
+                                    <a href="" class="comment-header-author"><%= issue.user.login %></a>
+                                    <span class="comment-header-action-text">
+                                        <a href="#">referenced this issue</a>
+                                    </span>
+                                    <div class="comment-header-right">
+                                        <a href="#" class="comment-header-date">
+                                            <%= issue.closed_at %>
+                                        </a>
+                                    </div>
+                                </div>
+                        
+                                <div class="comment-content discussion-reference-content">
+                                    <div class="comment-body">
+                                        <strong class="state state-closed">Closed</strong>
+                                        <h2>
+                                            <a href=""><span>Pull Request <%= issue.number %></span>
+                                            <%= issue.title %>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        <% } %>
+    <% }) %>
+  </body>
+</html>

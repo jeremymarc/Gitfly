@@ -1,0 +1,15 @@
+extends default
+
+block sidebar
+  ul#sidebar.nav.nav-pills.nav-stacked
+    li.organizations
+      for org in req.orgs
+        a(href="/users/#{req.user.username}/orgs/#{org.name}")
+          img(src=org.avatar_url, alt=org.name, width="55", height="55")
+          = org.name
+
+    li.repositories
+    li.issues
+    li.configuration
+
+

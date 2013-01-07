@@ -1,5 +1,46 @@
-extends ../layouts/default
+extends ../layouts/logged
 
-block main
+block content
   h1= user.name
+  h4= user.github.bio
+  
+  form.form-horizontal(method="POST")
+    fieldset
+      legend
+        i.icon-edit
+        | Personal informations
+    
+      div.control-group
+        label.control-label(for="email") Your email address
+        .controls
+          input(type="text", id="email", name="user[email]", value=req.user.email)
+
+
+      div.control-group
+        label.control-label(for="notification_period") daily notification
+        .controls
+          select(name="user[notification_period]")
+            for item in periods
+              option(selected=req.user.notification_period == item) #{item}
+    
+      .form-actions
+        button.btn.btn-primary(type="submit") Save changes
+        button.btn Cancel
+
+      legend
+        i.icon-briefcase
+        | Your organizations
+      
+
+      ul.organizations
+        for org in orgs
+          li.tag-name
+            a(href="/users/#{req.user.username}/orgs/#{org.name}")
+              = org.name
+            a.tag-delete.rm-org(href="/users/#{req.user.username}/orgs/#{org.name}", data-id=org.id, title="Remove this organization") x
+
+      .pull-right
+        a.btn.sync-repo.btn-info(href="/users/#{req.user.username}/sync")
+          i.icon-refresh
+          | Sync
 

@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
   // confirmations
   $('.confirm').submit(function (e) {
     e.preventDefault();
@@ -12,10 +11,4 @@ $(document).ready(function () {
       }
     });
   });
-
-  $('#tags').tagsInput({
-    'height':'60px',
-    'width':'280px'
-  });
-
 });

@@ -1,0 +1,83 @@
+extends ../layouts/logged
+
+block content
+  .page-heading
+    h2.page-title.muted
+      i.icon-dashboard 
+      = org.name
+
+      .page-info.hidden-phone
+        ul.stats
+
+  form.form-horizontal
+    fieldset
+      legend
+        i.icon-tags   
+        | Repositories
+      ul.repositories
+        for repo in repos
+          li.tag-name
+            = repo.name
+            a.tag-delete.rm-repo(href="/users/#{req.user.username}/orgs/#{org.name}/repositories/#{repo.name}", data-id=repo.id, title="Remove this repository") x
+
+      .pull-right
+        a.btn.sync-repo.btn-info(href="/users/#{req.user.username}/orgs/#{org.name}/sync")
+          i.icon-refresh
+          | Sync
+
+  form.form-horizontal(method="POST")
+    fieldset
+      legend
+        i.icon-inbox
+        | Notifications
+      div.control-group
+        label.control-label(for="notification_period") Destination email
+        .controls
+          input(type="text", name="org[email]", placeholder="Organization email", value=org.email)
+
+      div.control-group
+        label.control-label(for="notification_period") Email notification
+        .controls
+          select(name="org[notification_period]")
+            for item in periods
+              option(selected=org.notification_period == item) #{item}
+
+      .form-actions
+        button.btn.btn-primary(type="submit") Save changes
+        button.btn Cancel
+
+block javascripts
+  :coffeescript
+    
+    $(document)
+      .on('click','a.sync-repo', (e) ->
+        e.preventDefault()
+        $target = $(e.target)
+        endpoint = $target.attr('href')
+        $.ajax(
+          url: endpoint
+          type: "post"
+        )
+        .done((data) ->
+          document.location.reload()
+        )
+        .fail(->
+        )
+      )
+      .on('click', 'a.rm-repo', (e) ->
+        e.preventDefault()
+
+        $target = $(e.target)
+        id = $target.data('id')
+        endpoint = $target.attr('href')
+        if id
+          $.ajax(
+            url: endpoint
+            type: "delete"
+          )
+          .done((data) ->
+            $target.parent().remove()
+          )
+          .fail(->
+          )
+       )

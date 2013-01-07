@@ -4,11 +4,13 @@ html(lang='en', xmlns='http://www.w3.org/1999/xhtml', xmlns:fb='https://www.face
   body
     .wrapper
       include ../includes/header
-      .container
-        .main-content
-          .main-head
-            block main
+      #left_layout
+
+        #main_content.container-fluid
           block content
-      .push
+        block sidebar
+
     include ../includes/footer
     include ../includes/foot
+    block javascripts
+

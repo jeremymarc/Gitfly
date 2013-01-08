@@ -10,7 +10,6 @@ module.exports = (app, passport, auth) ->
   orgs  = require("../app/controllers/orgs")
   repos = require("../app/controllers/repos")
 
-  app.get "/users/:username/orgs", users.orgs
   app.get "/users/:username", users.show
   app.post "/users/:username", users.update
   app.get "/logout", users.logout

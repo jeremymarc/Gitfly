@@ -1,7 +1,7 @@
 {
     "name": "gitfly"
   , "description": "A github issue client"
-  , "version": "0.1"
+  , "version": "0.1.0"
   , "private": true
   , "author": "Jeremy Marc <jeremy.marc@me.com> (http://jeremymarc.github.com)"
   , "engines": {

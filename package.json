@@ -19,10 +19,10 @@
     , "connect-mongodb": "latest"
     , "passport": "latest"
     , "passport-github": "latest"
-    , "passport-google-oauth": "latest"
     , "underscore": "latest"
     , "gzippo": "latest"
     , "async": "latest"
     , "nodemon": "latest"
+    , "github" : "latest"
   }
 }

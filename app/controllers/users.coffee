@@ -61,4 +61,4 @@ exports.update = (req, res) ->
   user.save()
 
   #display a flash message
-  res.redirect('/users/' + req.user.id)
+  res.redirect('/users/' + req.user.username)

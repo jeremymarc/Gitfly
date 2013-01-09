@@ -15,14 +15,6 @@ block content
         .controls
           input(type="text", id="email", name="user[email]", value=req.user.email)
 
-
-      div.control-group
-        label.control-label(for="notification_period") daily notification
-        .controls
-          select(name="user[notification_period]")
-            for item in periods
-              option(selected=req.user.notification_period == item) #{item}
-    
       .form-actions
         button.btn.btn-primary(type="submit") Save changes
         button.btn Cancel

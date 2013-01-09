@@ -53,7 +53,6 @@ exports.boot = (passport, config) ->
           user: profile.username
           per_page: '100'
         , (err, rep) ->
-          console.log rep
           done err, user if err
           rep.forEach((r) ->
             org = Org.fromObject r

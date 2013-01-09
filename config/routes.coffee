@@ -54,8 +54,8 @@ module.exports = (app, passport, auth) ->
         return next(err)  if err
         return next(new Error("Failed to load orgs for user " + username)) unless orgs
         req.orgs = orgs
+        next()
 
-      next()
   
   # home route
   app.get "/", (req, res) ->

@@ -20,10 +20,10 @@ module.exports = (app, passport, auth) ->
   app.delete "/users/:username/orgs/:orgId/repositories/:repoName", repos.delete
 
   app.get "/auth/github", passport.authenticate("github",
-    failureRedirect: "/login"
+    failureRedirect: "/"
   ), users.signin
   app.get "/auth/github/callback", passport.authenticate("github",
-    failureRedirect: "/login"
+    failureRedirect: "/"
   ), users.authCallback
 
   app.param "repoName", (req, res, next, name) ->

@@ -27,7 +27,9 @@ exports.boot = (passport, config) ->
     User.findOne
       "github.id": profile.id
     , (err, user) ->
-      unless user
+      if user 
+        done err, user
+      else
         user = new User(
           name: profile.displayName
           email: profile.emails[0].value

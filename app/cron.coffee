@@ -58,7 +58,7 @@ User.find(
           when 'none' then value = -1
 
         console.log diff
-        if  diff > value > 0 or true
+        if  diff > value > 0
           Repository.find(
             org: org
           (err, repositories) ->

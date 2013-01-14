@@ -78,6 +78,8 @@ User.find(
                   direction: "asc"
                   since: current_date + "T00:00:00Z"
               , (err, res) ->
+                  callback null, null if err
+
                   console.log "Getting issues for organization " + org.name + " and repository " + repo.name
                   r = Repository.fromObject res
                   r.name = repo.name
@@ -98,7 +100,7 @@ User.find(
               #remove empty repo
               repos = []
               results.forEach((repo) ->
-                repos.push(repo) unless repo.user_issues is undefined
+                repos.push(repo) unless repo is undefined or repo.user_issues is undefined
               )
 
               if repos.length > 0 and org.email is not undefined

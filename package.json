@@ -20,6 +20,8 @@
     , "passport": "latest"
     , "passport-github": "latest"
     , "underscore": "latest"
+    , "email-templates": "latest"
+    , "nodemailer": "latest"
     , "gzippo": "latest"
     , "async": "latest"
     , "nodemon": "latest"

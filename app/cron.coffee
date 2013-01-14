@@ -33,11 +33,6 @@ github = new GitHubApi(
 today = new Date
 today.setDate(today.getDate() - 1) #yesterday
 
-dd = today.getDate()
-mm = today.getMonth()+1
-yyyy = today.getFullYear()
-current_date = yyyy + "-" + mm + "-" + dd
-
 User.find(
   provider: 'github'
 (err, users) ->
@@ -63,7 +58,7 @@ User.find(
           when 'none' then value = -1
 
         console.log diff
-        if  diff > value > 0 
+        if  diff > value > 0 or true
           Repository.find(
             org: org
           (err, repositories) ->
@@ -74,11 +69,11 @@ User.find(
                   user: org.name
                   repo: repo.name
                   state: "closed"
-                  sort: "updated"
                   direction: "asc"
-                  since: current_date + "T00:00:00Z"
+                  since: today.toISOString()
+                  per_page: 100
               , (err, res) ->
-                  callback null, null if err
+                  return callback null, null if err
 
                   console.log "Getting issues for organization " + org.name + " and repository " + repo.name
                   r = Repository.fromObject res
@@ -97,13 +92,18 @@ User.find(
                   callback null, r
               )
             , (err, results) ->
+              console.log "Computing result and sending notification"
+
               #remove empty repo
               repos = []
               results.forEach((repo) ->
-                repos.push(repo) unless repo is undefined or repo.user_issues is undefined
+                if repo and repo.user_issues
+                  repos.push(repo)
               )
 
-              if repos.length > 0 and org.email is not undefined
+              dest = org.email or user.email
+              if repos.length > 0 and dest
+                console.log 'Sending email notifications for org ' + org.name
                 email.sendDailyRepositoryIssues 
                   repositories: repos
                   name: org.name
